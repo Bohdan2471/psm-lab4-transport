@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1200" height="1200" fill="#ffffff"/>
+  <text x="600" y="44" text-anchor="middle" font-size="26" font-weight="700" fill="#1a1a1a">C4 Code — структура застосунку (REST API)</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2c3e50"/>
+    </marker>
+    <marker id="hollow" markerWidth="14" markerHeight="14" refX="11" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1,1 L11,5 L1,9 Z" fill="#ffffff" stroke="#c0392b" stroke-width="1.5"/>
+    </marker>
+    <style>
+      .box   { fill:#ffffff; stroke:#2c3e50; stroke-width:2; rx:6; }
+      .hdr   { font-size:17px; font-weight:700; fill:#1a1a1a; }
+      .sub   { font-size:13px; fill:#555555; }
+      .mod   { font-size:12px; fill:#888888; font-style:italic; }
+      .dep   { stroke:#2c3e50; stroke-width:2; fill:none; marker-end:url(#arrow); }
+      .impl  { stroke:#c0392b; stroke-width:2; stroke-dasharray:6 4; fill:none; marker-end:url(#hollow); }
+      .ext   { fill:#eef2f5; stroke:#2c3e50; stroke-width:2; }
+      .grp   { fill:none; stroke:#c9d2da; stroke-width:1.5; stroke-dasharray:4 4; }
+      .glbl  { font-size:13px; font-weight:700; fill:#8a97a3; }
+    </style>
+  </defs>
+
+  <!-- ===== Client ===== -->
+  <rect class="ext" x="470" y="70" width="260" height="56" rx="6"/>
+  <text class="hdr" x="600" y="95" text-anchor="middle">Клієнт</text>
+  <text class="sub" x="600" y="114" text-anchor="middle">браузер / curl / Postman</text>
+
+  <!-- ===== Presentation layer ===== -->
+  <rect class="grp" x="40" y="160" width="1120" height="150" rx="8"/>
+  <text class="glbl" x="60" y="182">Рівень представлення (HTTP / REST)</text>
+
+  <rect class="box" x="90" y="196" width="320" height="96" rx="6"/>
+  <text class="hdr" x="110" y="222">FastAPI app</text>
+  <text class="mod" x="110" y="240">app/main.py</text>
+  <text class="sub" x="110" y="262">реєструє 3 ресурси</text>
+  <text class="sub" x="110" y="280">/vehicles /drivers /trips</text>
+
+  <rect class="box" x="470" y="196" width="340" height="96" rx="6"/>
+  <text class="hdr" x="490" y="222">crud_router()</text>
+  <text class="mod" x="490" y="240">app/routers.py</text>
+  <text class="sub" x="490" y="262">фабрика CRUD: GET / POST</text>
+  <text class="sub" x="490" y="280">PUT / DELETE для сутності</text>
+
+  <!-- ===== Validation layer ===== -->
+  <rect class="grp" x="40" y="340" width="1120" height="150" rx="8"/>
+  <text class="glbl" x="60" y="362">Рівень валідації</text>
+
+  <rect class="box" x="470" y="376" width="340" height="96" rx="6"/>
+  <text class="hdr" x="490" y="402">Схеми Create / Update</text>
+  <text class="mod" x="490" y="420">app/schemas.py</text>
+  <text class="sub" x="490" y="442">VehicleCreate, DriverCreate,</text>
+  <text class="sub" x="490" y="460">TripCreate, ... (+Update)</text>
+
+  <rect class="box" x="870" y="376" width="290" height="96" rx="6"/>
+  <text class="hdr" x="890" y="402">Валідатори (regex)</text>
+  <text class="mod" x="890" y="420">app/validators.py</text>
+  <text class="sub" x="890" y="442">email, телефон,</text>
+  <text class="sub" x="890" y="460">номерний знак</text>
+
+  <!-- ===== Domain / abstraction layer (OCP) ===== -->
+  <rect class="grp" x="40" y="520" width="1120" height="150" rx="8"/>
+  <text class="glbl" x="60" y="542">Рівень сховища — абстракція (OCP)</text>
+
+  <rect class="box" x="90" y="556" width="320" height="96" rx="6"/>
+  <text class="hdr" x="110" y="582">«interface» Repository</text>
+  <text class="mod" x="110" y="600">app/repository.py</text>
+  <text class="sub" x="110" y="622">list / get / create /</text>
+  <text class="sub" x="110" y="640">update / delete</text>
+
+  <rect class="box" x="470" y="556" width="340" height="96" rx="6"/>
+  <text class="hdr" x="490" y="582">SQLModelRepository</text>
+  <text class="mod" x="490" y="600">app/repository.py</text>
+  <text class="sub" x="490" y="622">реалізація для PostgreSQL;</text>
+  <text class="sub" x="490" y="640">нове сховище = новий клас</text>
+
+  <!-- ===== Data layer ===== -->
+  <rect class="grp" x="40" y="700" width="1120" height="160" rx="8"/>
+  <text class="glbl" x="60" y="722">Рівень даних</text>
+
+  <rect class="box" x="90" y="736" width="320" height="100" rx="6"/>
+  <text class="hdr" x="110" y="762">Моделі (таблиці)</text>
+  <text class="mod" x="110" y="780">app/models.py</text>
+  <text class="sub" x="110" y="802">Vehicle, Driver, Trip,</text>
+  <text class="sub" x="110" y="820">DriverVehiclePermit</text>
+
+  <rect class="box" x="470" y="736" width="340" height="100" rx="6"/>
+  <text class="hdr" x="490" y="762">engine, get_session</text>
+  <text class="mod" x="490" y="780">app/db.py</text>
+  <text class="sub" x="490" y="802">підключення до БД,</text>
+  <text class="sub" x="490" y="820">створення таблиць</text>
+
+  <rect class="box" x="870" y="736" width="290" height="100" rx="6"/>
+  <text class="hdr" x="890" y="762">DATABASE_URL</text>
+  <text class="mod" x="890" y="780">app/config.py</text>
+  <text class="sub" x="890" y="802">рядок підключення</text>
+  <text class="sub" x="890" y="820">(DSN)</text>
+
+  <!-- ===== DB (external) ===== -->
+  <rect class="ext" x="470" y="900" width="340" height="70" rx="6"/>
+  <text class="hdr" x="640" y="928" text-anchor="middle">PostgreSQL 18 (Docker)</text>
+  <text class="sub" x="640" y="950" text-anchor="middle">docker-compose.yaml · порт 5432</text>
+
+  <!-- ===== Seed script ===== -->
+  <rect class="box" x="870" y="556" width="290" height="96" rx="6"/>
+  <text class="hdr" x="890" y="582">Ініціалізація БД</text>
+  <text class="mod" x="890" y="600">scripts/init_db.py</text>
+  <text class="sub" x="890" y="622">створення таблиць +</text>
+  <text class="sub" x="890" y="640">117 тестових записів</text>
+
+  <!-- ===================== ARROWS ===================== -->
+  <!-- client -> app -->
+  <path class="dep" d="M600 126 V196"/>
+  <text class="mod" x="610" y="165">HTTP-запити</text>
+
+  <!-- app -> router -->
+  <path class="dep" d="M410 244 H470"/>
+
+  <!-- router -> schemas -->
+  <path class="dep" d="M640 292 V376"/>
+  <!-- schemas -> validators -->
+  <path class="dep" d="M810 424 H870"/>
+  <!-- router -> Repository interface -->
+  <path class="dep" d="M560 292 C560 420 250 430 250 556"/>
+  <!-- SQLModelRepository ..|> Repository (implements) -->
+  <path class="impl" d="M470 604 H410"/>
+  <text class="mod" x="415" y="596">реалізує</text>
+  <!-- SQLModelRepository -> models -->
+  <path class="dep" d="M560 652 V736"/>
+  <!-- SQLModelRepository -> db -->
+  <path class="dep" d="M680 652 V736"/>
+  <!-- db -> config -->
+  <path class="dep" d="M810 786 H870"/>
+  <!-- db -> PostgreSQL -->
+  <path class="dep" d="M640 836 V900"/>
+  <!-- init_db -> models/db -->
+  <path class="dep" d="M960 652 V736 H810" />
+
+  <!-- ===== legend ===== -->
+  <g>
+    <rect x="40" y="1000" width="1120" height="150" rx="8" fill="#f7f9fa" stroke="#c9d2da" stroke-width="1.5"/>
+    <text class="glbl" x="60" y="1026">Умовні позначення</text>
+    <line x1="70" y1="1060" x2="140" y2="1060" class="dep"/>
+    <text class="sub" x="155" y="1065">залежність / виклик (хто кого використовує)</text>
+    <line x1="70" y1="1100" x2="140" y2="1100" class="impl"/>
+    <text class="sub" x="155" y="1105">реалізація інтерфейсу (принцип OCP: нове сховище додається новим класом без зміни коду)</text>
+    <rect x="70" y="1128" width="30" height="16" class="ext"/>
+    <text class="sub" x="155" y="1141">зовнішній компонент (клієнт, база даних)</text>
+  </g>
+</svg>

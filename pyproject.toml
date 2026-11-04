@@ -1,0 +1,37 @@
+[project]
+name = "4-laba"
+version = "0.1.0"
+description = "ЛР4: Збереження даних та веб-інтерфейс (PostgreSQL + FastAPI), варіант 28 — Автотранспортне підприємство"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg[binary]>=3.2",
+    "fastapi>=0.115",
+    "uvicorn>=0.34",
+    "sqlmodel>=0.0.22",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8",
+    "mypy>=1.13",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# E/F — pycodestyle+pyflakes, I — isort, UP — pyupgrade, B — bugbear
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.flake8-bugbear]
+# Depends/Query — стандартний патерн FastAPI у значеннях за замовчуванням
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
